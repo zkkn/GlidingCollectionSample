@@ -8,20 +8,25 @@
 
 import UIKit
 import GlidingCollection
+import Photos
 
 
 class ViewController: UIViewController {
   
-  @IBOutlet var glidingView: GlidingCollection!
-  fileprivate var collectionView: UICollectionView!
-  fileprivate var items = ["gloves", "boots", "bindings", "hoodie"]
-  fileprivate var images: [[UIImage?]] = []
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setup()
-  }
-  
+    @IBOutlet var glidingView: GlidingCollection!
+    fileprivate var collectionView: UICollectionView!
+    fileprivate var assetCollection: PHAssetCollection = PHAssetCollection()
+    fileprivate var photoAsset: PHFetchResult<PHAsset>!
+    fileprivate var assetThumbnailSize: CGSize!
+    
+    fileprivate var items = ["gloves", "boots", "bindings", "hoodie"]
+    fileprivate var images: [[UIImage?]] = []
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+    }
 }
 
 // MARK: - Setup
@@ -43,6 +48,15 @@ extension ViewController {
     collectionView.backgroundColor = glidingView.backgroundColor
   }
   
+    func getSmartFolderList() -> [PHCollectionList] {
+        let fetchResult: PHFetchResult = PHCollectionList.fetchCollectionLists(with: .smartFolder, subtype: .any, options: nil)
+        var smartFolderLists = [PHCollectionList]()
+        fetchResult.enumerateObjects({ (smartFolder, idx, stop) -> Void in
+            smartFolderLists.append(smartFolder)
+        })
+        return smartFolderLists
+    }
+    
   private func loadImages() {
     for item in items {
       let imageURLs = FileManager.default.fileUrls(for: "jpeg", fileName: item)
@@ -54,8 +68,12 @@ extension ViewController {
       }
       self.images.append(images)
     }
+    let fetchResult: PHFetchResult = PHCollectionList.fetchCollectionLists(with: .smartFolder, subtype: .any, options: nil)
+    var smartFolderLists = [PHCollectionList]()
+    fetchResult.enumerateObjects({ (smartFolder, idx, stop) -> Void in
+        smartFolderLists.append(smartFolder)
+    })
   }
-  
 }
 
 // MARK: - CollectionView 🎛
@@ -63,6 +81,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     let section = glidingView.expandedItemIndex
+//    return getSmartFolderList[section].count
     return images[section].count
   }
   
