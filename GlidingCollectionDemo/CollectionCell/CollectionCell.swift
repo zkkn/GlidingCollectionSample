@@ -17,10 +17,14 @@ class CollectionCell: UICollectionViewCell {
     func setConfigure(assets: PHAsset) {
         let manager = PHImageManager()
         
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .fastFormat
+        
         manager.requestImage(for: assets,
                              targetSize: frame.size,
-                             contentMode: .aspectFill,
-                             options: nil,
+                             contentMode: .aspectFit,
+                             options: requestOptions,
                              resultHandler: { [weak self] (image, info) in
                                 guard let wself = self, let _ = image else {
                                     return
