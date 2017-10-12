@@ -6,15 +6,11 @@
 //  Copyright © 2017 Ramotion Inc. All rights reserved.
 //
 
-// インスタンスを毎回どこかで作っって初期化されてるせいでSmart FolderのVideoしか入ってない気がする
-
 import GlidingCollection
 import Photos
 import UIKit
 
-
 class ViewController: UIViewController {
-    
     @IBOutlet var glidingView: GlidingCollection!
     fileprivate var collectionView: UICollectionView!
     fileprivate var assetThumbnailSize: CGSize!
@@ -29,8 +25,8 @@ class ViewController: UIViewController {
 
 
 // MARK: - Setup
+
 extension ViewController {
-    
     fileprivate func setup() {
         setupGlidingCollectionView()
         loadImages()
@@ -48,6 +44,9 @@ extension ViewController {
     }
     
     fileprivate func loadImages() {
+        DispatchQueue.main.async {
+            self.glidingView.reloadData()
+        }
         getSmartFolder(smartFolderList: getSmartFolderList())
     }
     
@@ -59,7 +58,6 @@ extension ViewController {
         fetchResult.enumerateObjects({ (smartFolder, idx, stop) -> Void in
             smartFolderLists.append(smartFolder)
         })
-//        print(smartFolderLists)
         return smartFolderLists
     }
     
@@ -86,7 +84,6 @@ extension ViewController {
 // MARK: - CollectionView
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let section = glidingView.expandedItemIndex
         return allPhotos[section].photos.count
@@ -118,17 +115,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
 
 // MARK: - Gliding Collection
-// どうやらこいつがViewDidLoadの前に呼ばれるからallPhotos.countが0になってうまくいかない
-// あらかじめ定数でセットすればうまくいくので
 
 extension ViewController: GlidingCollectionDatasource {
     func numberOfItems(in collection: GlidingCollection) -> Int {
-//        return allPhotos.count
-        return 8
+        return allPhotos.count
     }
     
     func glidingCollection(_ collection: GlidingCollection, itemAtIndex index: Int) -> String {
-//        return "\(allPhotos[index].name)"
-        return "\(index)"
+        return "\(allPhotos[index].name)"
     }
 }
