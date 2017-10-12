@@ -26,10 +26,8 @@ class CollectionCell: UICollectionViewCell {
                              contentMode: .aspectFit,
                              options: requestOptions,
                              resultHandler: { [weak self] (image, info) in
-                                guard let wself = self, let _ = image else {
-                                    return
-                                }
-                                wself.imageView.image = image
+                                guard let _ = self, let image = image else { return }
+                                self?.imageView.image = image
         })
     }
 }
