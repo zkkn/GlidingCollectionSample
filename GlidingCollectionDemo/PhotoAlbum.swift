@@ -1,5 +1,5 @@
 //
-//  Photo.swift
+//  PhotoAlbum.swift
 //  GlidingCollection
 //
 //  Created by Shoichi Kanzaki on 2017/10/13.
@@ -9,7 +9,7 @@
 import Foundation
 import Photos
 
-struct Photos {
+struct PhotoAlbum {
     var name = ""
     var photos = [PHAsset]()
 }

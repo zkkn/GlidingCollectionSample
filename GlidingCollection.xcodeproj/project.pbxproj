@@ -24,7 +24,7 @@
 		9DD0DD191E766F25003E224C /* GlidingCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0DD131E766F25003E224C /* GlidingCollectionDelegate.swift */; };
 		9DD0DD1A1E767881003E224C /* GlidingCollection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D56EE9F1E6B2D5E008C3698 /* GlidingCollection.framework */; };
 		9DD0DD1B1E767881003E224C /* GlidingCollection.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D56EE9F1E6B2D5E008C3698 /* GlidingCollection.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C7FB0EF11F8FD6950066460E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB0EF01F8FD6950066460E /* Photo.swift */; };
+		C7FB0EF11F8FD6950066460E /* PhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB0EF01F8FD6950066460E /* PhotoAlbum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,7 @@
 		9DD0DD101E766F25003E224C /* GlidingLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlidingLayout.swift; sourceTree = "<group>"; };
 		9DD0DD121E766F25003E224C /* GlidingCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlidingCollectionDataSource.swift; sourceTree = "<group>"; };
 		9DD0DD131E766F25003E224C /* GlidingCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlidingCollectionDelegate.swift; sourceTree = "<group>"; };
-		C7FB0EF01F8FD6950066460E /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		C7FB0EF01F8FD6950066460E /* PhotoAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +132,7 @@
 				9DD0DCCD1E766EF0003E224C /* CollectionCell */,
 				9DD0DCD01E766EF0003E224C /* Extensions */,
 				9D56EEC01E6B2E88008C3698 /* Resources */,
-				C7FB0EF01F8FD6950066460E /* Photo.swift */,
+				C7FB0EF01F8FD6950066460E /* PhotoAlbum.swift */,
 			);
 			path = GlidingCollectionDemo;
 			sourceTree = "<group>";
@@ -327,7 +327,7 @@
 				9D56EEB11E6B2D82008C3698 /* AppDelegate.swift in Sources */,
 				9DD0DCF11E766EF0003E224C /* CollectionCell.swift in Sources */,
 				9DD0DCF31E766EF0003E224C /* FileManager.swift in Sources */,
-				C7FB0EF11F8FD6950066460E /* Photo.swift in Sources */,
+				C7FB0EF11F8FD6950066460E /* PhotoAlbum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

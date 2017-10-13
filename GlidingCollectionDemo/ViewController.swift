@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     fileprivate var collectionView: UICollectionView!
     fileprivate var assetThumbnailSize: CGSize!
     
-    var allPhotos = [Photos]()
+    var photoAlbums = [PhotoAlbum]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,21 +62,21 @@ extension ViewController {
     }
     
     fileprivate func getSmartFolder(smartFolderList: [PHAssetCollection]) {
-        var allAssets = [Photos]()
+        var photoAlbums = [PhotoAlbum]()
         for smartFolder in smartFolderList {
             let fetchOption = PHFetchOptions()
             fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
             let fetchResult: PHFetchResult = PHAsset.fetchAssets(in: smartFolder, options: fetchOption)
             if fetchResult.count != 0 {
-                var photos = Photos()
-                photos.name = smartFolder.localizedTitle!
-                fetchResult.enumerateObjects({ (asset, idx, stop) -> Void in
-                    photos.photos.append(asset)
+                var photoAlbum = PhotoAlbum()
+                photoAlbum.name = smartFolder.localizedTitle!
+                fetchResult.enumerateObjects({ (photo, idx, stop) -> Void in
+                    photoAlbum.photos.append(photo)
                 })
-                allAssets.append(photos)
+                photoAlbums.append(photoAlbum)
             }
         }
-        self.allPhotos = allAssets
+        self.photoAlbums = photoAlbums
     }
 }
 
@@ -86,13 +86,13 @@ extension ViewController {
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let section = glidingView.expandedItemIndex
-        return allPhotos[section].photos.count
+        return photoAlbums[section].photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionCell else { return UICollectionViewCell() }
         let section = glidingView.expandedItemIndex
-        cell.setConfigure(assets: allPhotos[section].photos[indexPath.row])
+        cell.setConfigure(assets: photoAlbums[section].photos[indexPath.row])
         
         cell.contentView.clipsToBounds = true
         
@@ -118,10 +118,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
 extension ViewController: GlidingCollectionDatasource {
     func numberOfItems(in collection: GlidingCollection) -> Int {
-        return allPhotos.count
+        return photoAlbums.count
     }
     
     func glidingCollection(_ collection: GlidingCollection, itemAtIndex index: Int) -> String {
-        return "\(allPhotos[index].name)"
+        return "\(photoAlbums[index].name)"
     }
 }
